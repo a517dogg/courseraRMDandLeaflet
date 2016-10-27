@@ -1,0 +1,32 @@
+---
+title: "Leaflet/RMarkdown project"
+author: "Adrian Martin"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, echo = FALSE)
+```
+
+####Places I'd rather be right now
+
+```{r}
+library(leaflet)
+place <- data.frame(lat = c(20.628086, -22.971830, 47.263388), 
+                    lng = c(-87.066625, -43.183545, 11.400604),
+                    label = c("Playa Del Carmen", "Rio", "Innsbruck"))
+
+place %>%
+    leaflet() %>%
+    addTiles() %>%
+    addMarkers(popup = place$label) %>%
+    fitBounds(lng1 = max(place$lng),
+              lat1 = max(place$lat) + 5,
+              lng2 = min(place$lng),
+              lat2 = min(place$lat))
+```
+
+
+
+
